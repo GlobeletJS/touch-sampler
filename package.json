@@ -1,0 +1,34 @@
+{
+  "name": "touchy",
+  "version": "0.0.1",
+  "description": "A lightweight manager for user interaction with an animated HTML element",
+  "main": "dist/touchy.bundle.js",
+  "files": [
+    "dist"
+  ],
+  "directories": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c build/rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjhembd/touchy.git"
+  },
+  "keywords": [
+    "mouse",
+    "touch",
+    "javascript"
+  ],
+  "author": "Jeshurun Hembd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jjhembd/touchy/issues"
+  },
+  "homepage": "https://github.com/jjhembd/touchy#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "rollup": "^1.11.3",
+    "rollup-plugin-node-resolve": "^4.2.3"
+  }
+}
