@@ -17,15 +17,15 @@ export function initCursor() {
 
   return {
     // Methods to report local state. These protect local values, returning a copy
-    touchStarted: function() { return touchStarted; },
-    zoomStarted:  function() { return zoomStarted; },
-    moved:        function() { return moved; },
-    zoomed:       function() { return zoomed; },
-    touchEnded:   function() { return touchEnded; },
-    hasChanged:   function() { return (moved || zoomed); },
-    x: function() { return cursorX; },
-    y: function() { return cursorY; },
-    zscale: function() { return zscale; },
+    touchStarted: () => touchStarted,
+    zoomStarted:  () => zoomStarted,
+    moved:        () => moved,
+    zoomed:       () => zoomed,
+    touchEnded:   () => touchEnded,
+    hasChanged:   () => (moved || zoomed),
+    zscale:       () => zscale,
+    x: () => cursorX,
+    y: () => cursorY,
 
     // Methods to update local state
     startTouch,
@@ -53,13 +53,11 @@ export function initCursor() {
     cursorX = evnt.clientX;
     cursorY = evnt.clientY;
     moved = true;
-    return;
   }
 
   function zoom(scale) {
     zscale *= scale;
     zoomed = true;
-    return;
   }
 
   function endTouch() {
