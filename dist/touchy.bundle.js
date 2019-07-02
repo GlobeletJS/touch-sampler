@@ -23,7 +23,7 @@ function initCursor() {
   var startY = 0;
   // What is a click/tap and what is a drag? If the cursor moved more than
   // this threshold between touchStart and touchEnd, it is a drag
-  const threshold = 3;
+  const threshold = 5;
 
   return {
     // Methods to report local state. These protect local values, returning a copy
@@ -68,7 +68,7 @@ function initCursor() {
     cursorX = evnt.clientX;
     cursorY = evnt.clientY;
     moved = true;
-    var dist = abs(cursorX - startX) + abs(cursorY - startY);
+    var dist = Math.abs(cursorX - startX) + Math.abs(cursorY - startY);
     if (dist > threshold) tapping = false;
   }
 
