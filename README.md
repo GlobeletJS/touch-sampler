@@ -23,13 +23,11 @@ frame, when the main program is ready to use them.
 ## Usage
 
 initTouch takes one argument: the HTML element on which mouse or touch events
-will be detected. 
-
-initTouch returns a cursor object with methods to query and reset the stored
-information.
+will be detected. initTouch returns a cursor object with methods to query and 
+reset the stored information.
 
 At each frame refresh, the calling code should:
  1. Retrieve information about the cursor state, via cursor.touchStarted(), etc
  2. Reset the state flags for the next call, via cursor.reset()
 
-For details about the API, see cursor.js
+For details about the API, see src/cursor.js
