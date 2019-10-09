@@ -2,7 +2,7 @@ import { initCursor } from "./cursor.js";
 
 // Add event listeners to update the state of a cursor object
 // Input div is an HTML element on which events will be registered
-export function initTouchy(div) {
+export function initTouch(div) {
   const cursor = initCursor();
 
   // Remember the distance between two pointers

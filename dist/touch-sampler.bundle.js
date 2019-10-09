@@ -104,7 +104,7 @@ function initCursor() {
 
 // Add event listeners to update the state of a cursor object
 // Input div is an HTML element on which events will be registered
-function initTouchy(div) {
+function initTouch(div) {
   const cursor = initCursor();
 
   // Remember the distance between two pointers
@@ -194,4 +194,4 @@ function initTouchy(div) {
   }
 }
 
-export { initTouchy };
+export { initTouch };

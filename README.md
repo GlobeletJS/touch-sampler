@@ -1,15 +1,35 @@
-# Touchy
+# touch-sampler
+
 A lightweight manager for user interaction with an animated HTML element.
 
-Touchy is designed for map-type controls, enabling click/drag and zoom actions.
+touch-sampler records information about mouse or touch interaction with an
+HTML element, and reports that information when requested. This enables the
+calling program to **sample** user interactions when it is ready for them,
+rather than having to handle them as they occur.
 
-The factory function in main.js takes one argument, an HTML element, and
-adds event handlers. These events may be fired at arbitrary times. 
-For an animation, however, we will be checking for user input once per 
-frame. We therefore store the latest inputs in cursor.js.
+This on-demand reporting of interactions is useful for animations based on
+physical modeling. In these animations, the physical state (velocity, 
+acceleration, etc) is updated once per frame, at typical frame rates of 60
+frames per second. 
+
+At each frame, the updated physical state depends on both the state from the
+previous frame, and any user interactions that have occured *between* the
+last and current frames. These interactions are reported to the program by
+[DOM events](https://developer.mozilla.org/en-US/docs/Web/Events), which can
+fire at arbitrary times, not in sync with the frame rate. touch-sampler helps
+keep track of these events by storing information about them until the next
+frame, when the main program is ready to use them.
+
+## Usage
+
+initTouch takes one argument: the HTML element on which mouse or touch events
+will be detected. 
+
+initTouch returns a cursor object with methods to query and reset the stored
+information.
 
 At each frame refresh, the calling code should:
  1. Retrieve information about the cursor state, via cursor.touchStarted(), etc
  2. Reset the state flags for the next call, via cursor.reset()
 
-The only return is the cursor object. For details about the API, see cursor.js
+For details about the API, see cursor.js

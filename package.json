@@ -1,34 +1,37 @@
 {
-  "name": "touchy",
-  "version": "0.0.1",
+  "name": "touch-sampler",
+  "version": "0.0.0",
   "description": "A lightweight manager for user interaction with an animated HTML element",
-  "main": "dist/touchy.bundle.js",
+  "main": "dist/touch-sampler.bundle.js",
+  "module": "dist/touch-sampler.bundle.js",
   "files": [
     "dist"
   ],
   "directories": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c build/rollup.config.js"
+    "build": "rollup -c build/rollup.config.js",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jjhembd/touchy.git"
+    "url": "git+https://github.com/GlobeletJS/touch-sampler.git"
   },
   "keywords": [
     "mouse",
     "touch",
+    "animation",
     "javascript"
   ],
   "author": "Jeshurun Hembd",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jjhembd/touchy/issues"
+    "url": "https://github.com/GlobeletJS/touch-sampler/issues"
   },
-  "homepage": "https://github.com/jjhembd/touchy#readme",
+  "homepage": "https://github.com/GlobeletJS/touch-sampler#readme",
   "devDependencies": {
     "http-server": "^0.11.1",
-    "rollup": "^1.11.3",
-    "rollup-plugin-node-resolve": "^4.2.3"
+    "rollup": "^1.23.1",
+    "rollup-plugin-node-resolve": "^4.2.4"
   }
 }
