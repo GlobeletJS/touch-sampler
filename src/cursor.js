@@ -26,15 +26,15 @@ export function initCursor() {
   const threshold = 6;
 
   return {
-    // Methods to report local state. These protect local values, returning a copy
+    // Methods to report local state. Return a copy to protect local values
     touchStarted: () => touchStarted,
-    zoomStarted:  () => zoomStarted,
-    moved:        () => moved,
-    zoomed:       () => zoomed,
-    tapped:       () => tapped,
-    touchEnded:   () => touchEnded,
-    hasChanged:   () => (moved || zoomed || tapped),
-    zscale:       () => zscale,
+    zoomStarted: () => zoomStarted,
+    moved: () => moved,
+    zoomed: () => zoomed,
+    tapped: () => tapped,
+    touchEnded: () => touchEnded,
+    hasChanged: () => (moved || zoomed || tapped),
+    zscale: () => zscale,
     x: () => cursorX,
     y: () => cursorY,
 

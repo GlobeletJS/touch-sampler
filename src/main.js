@@ -7,37 +7,38 @@ export function initTouch(div) {
 
   // Remember the distance between two pointers
   var lastDistance = 1.0;
-  
+
   // Capture the drag event so we can disable any default actions
-  div.addEventListener('dragstart', function(drag) {
+  div.addEventListener("dragstart", function(drag) {
     drag.preventDefault();
     return false;
   }, false);
 
   // Add mouse events
-  div.addEventListener('mousedown',   cursor.startTouch, false);
-  div.addEventListener('mousemove',   cursor.move,       false);
-  div.addEventListener('mouseup',     cursor.endTouch,   false);
-  div.addEventListener('mouseleave',  cursor.endTouch,   false);
-  div.addEventListener('wheel',       wheelZoom,         false);
+  div.addEventListener("mousedown",   cursor.startTouch, false);
+  div.addEventListener("mousemove",   cursor.move,       false);
+  div.addEventListener("mouseup",     cursor.endTouch,   false);
+  div.addEventListener("mouseleave",  cursor.endTouch,   false);
+  div.addEventListener("wheel",       wheelZoom,         false);
 
   // Add touch events
-  div.addEventListener('touchstart',  initTouch,       false);
-  div.addEventListener('touchmove',   moveTouch,       false);
-  div.addEventListener('touchend',    cursor.endTouch, false);
-  div.addEventListener('touchcancel', cursor.endTouch, false);
+  div.addEventListener("touchstart",  initTouch,       false);
+  div.addEventListener("touchmove",   moveTouch,       false);
+  div.addEventListener("touchend",    cursor.endTouch, false);
+  div.addEventListener("touchcancel", cursor.endTouch, false);
 
   // Return a pointer to the cursor object
   return cursor;
 
   function initTouch(evnt) {
-    evnt.preventDefault();
-    switch (evnt.touches.length) {
-      case 1: 
-        cursor.startTouch(evnt.touches[0]);
+    const { preventDefault, touches } = evnt;
+    preventDefault();
+    switch (touches.length) {
+      case 1:
+        cursor.startTouch(touches[0]);
         break;
       case 2:
-        var midpoint = getMidPoint(evnt.touches[0], evnt.touches[1]);
+        var midpoint = getMidPoint(touches[0], touches[1]);
         cursor.startTouch(midpoint);
         cursor.startZoom(midpoint);
         // Initialize the starting distance between touches
@@ -49,15 +50,16 @@ export function initTouch(div) {
   }
 
   function moveTouch(evnt) {
-    evnt.preventDefault();
+    const { preventDefault, touches } = evnt;
+    preventDefault();
     // NOTE: MDN says to add the touchmove handler within the touchstart handler
     // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Using_Touch_Events
-    switch (evnt.touches.length) {
+    switch (touches.length) {
       case 1:
-        cursor.move(evnt.touches[0]);
+        cursor.move(touches[0]);
         break;
       case 2:
-        var midpoint = getMidPoint(evnt.touches[0], evnt.touches[1]);
+        var midpoint = getMidPoint(touches[0], touches[1]);
         // Move the cursor to the midpoint
         cursor.move(midpoint);
         // Zoom based on the change in distance between the two touches
@@ -78,7 +80,7 @@ export function initTouch(div) {
       clientX: p0.clientX + dx / 2,
       clientY: p0.clientY + dy / 2,
       distance: Math.sqrt(dx * dx + dy * dy),
-    }
+    };
   }
 
   function wheelZoom(turn) {

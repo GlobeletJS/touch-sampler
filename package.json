@@ -2,15 +2,16 @@
   "name": "touch-sampler",
   "version": "0.0.1",
   "description": "A lightweight manager for user interaction with an animated HTML element",
-  "main": "dist/touch-sampler.bundle.js",
-  "module": "dist/touch-sampler.bundle.js",
+  "main": "dist/touch-sampler.js",
+  "module": "dist/touch-sampler.js",
   "files": [
     "dist"
   ],
   "directories": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src",
     "build": "rollup -c build/rollup.config.js",
+    "test": "npm run lint",
     "postversion": "git push && git push --tags"
   },
   "repository": {
@@ -30,7 +31,9 @@
   },
   "homepage": "https://github.com/GlobeletJS/touch-sampler#readme",
   "devDependencies": {
-    "rollup": "^2.4.0",
-    "rollup-plugin-node-resolve": "^5.2.0"
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "eslint": "^7.30.0",
+    "eslint-config-globeletjs": "^0.0.5",
+    "rollup": "^2.52.8"
   }
 }

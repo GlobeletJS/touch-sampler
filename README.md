@@ -1,5 +1,7 @@
 # touch-sampler
 
+![tests](https://github.com/GlobeletJS/touch-sampler/actions/workflows/node.js.yml/badge.svg)
+
 A lightweight manager for user interaction with an animated HTML element.
 
 touch-sampler records information about mouse or touch interaction with an
