@@ -68,7 +68,7 @@ export function initCursor() {
     cursorX = evnt.clientX;
     cursorY = evnt.clientY;
     moved = true;
-    const dist = Math.abs(cursorX - startX) + Math.abs(cursorY - startY);
+    const dist = Math.hypot(cursorX - startX, cursorY - startY);
     if (dist > threshold) tapping = false;
   }
 

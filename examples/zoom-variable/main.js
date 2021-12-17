@@ -2,7 +2,7 @@ import { initTouch } from "../../dist/touch-sampler.js";
 import { render } from "./render.js";
 
 export function setupMap(canvas) {
-  const cursor = initTouch(canvas, { wheelDelta: "constant" });
+  const cursor = initTouch(canvas);
   let scale = 1;
   let x = 0;
   let y = 0;

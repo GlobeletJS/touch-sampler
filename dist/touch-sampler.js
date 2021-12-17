@@ -68,7 +68,7 @@ function initCursor() {
     cursorX = evnt.clientX;
     cursorY = evnt.clientY;
     moved = true;
-    const dist = Math.abs(cursorX - startX) + Math.abs(cursorY - startY);
+    const dist = Math.hypot(cursorX - startX, cursorY - startY);
     if (dist > threshold) tapping = false;
   }
 
@@ -102,10 +102,50 @@ function initCursor() {
   }
 }
 
-function initTouch(div) {
+function getMidPoint(p0, p1) {
+  // Convert a two-touch event to a single event at the midpoint
+  const dx = p1.clientX - p0.clientX;
+  const dy = p1.clientY - p0.clientY;
+  return {
+    clientX: p0.clientX + dx / 2,
+    clientY: p0.clientY + dy / 2,
+    distance: Math.hypot(dx, dy),
+  };
+}
+
+function initWheelScale(wheelDelta) {
+  return (wheelDelta === "constant") ? wheelScale_const : wheelScale;
+}
+
+function wheelScale(turn) {
+  const { deltaY, deltaMode } = turn;
+  if (!deltaY) return 1.0; // Could be a deltaX or deltaZ event
+
+  switch (deltaMode) {
+    case 0:
+      // Chrome on Windows 10 Surface Book 2: deltaY = -100 * devicePixelRatio
+      return 1.0 + deltaY * 0.002 / window.devicePixelRatio;
+    case 1:
+      // Firefox on Windows 10 Surface Book 2: deltaY = -3
+      return 1.0 + deltaY * 0.067;
+    case 2:
+      // Untested. Ratio vs. case 0 is from d3-zoom
+      return 1.0 + deltaY;
+  }
+}
+
+function wheelScale_const(turn) {
+  // We ignore the dY from the browser, since it may be arbitrarily scaled
+  // based on screen resolution or other factors. We keep only the sign.
+  // See https://github.com/Leaflet/Leaflet/issues/4538
+  return 1.0 + 0.2 * Math.sign(turn.deltaY);
+}
+
+function initTouch(div, { wheelDelta = "default" } = {}) {
   // Add event listeners to update the state of a cursor object
   // Input div is an HTML element on which events will be registered
   const cursor = initCursor();
+  const getWheelScale = initWheelScale(wheelDelta);
 
   // Remember the distance between two pointers
   let lastDistance = 1.0;
@@ -171,25 +211,10 @@ function initTouch(div) {
     }
   }
 
-  // Convert a two-touch event to a single event at the midpoint
-  function getMidPoint(p0, p1) {
-    const dx = p1.clientX - p0.clientX;
-    const dy = p1.clientY - p0.clientY;
-    return {
-      clientX: p0.clientX + dx / 2,
-      clientY: p0.clientY + dy / 2,
-      distance: Math.hypot(dx, dy),
-    };
-  }
-
   function wheelZoom(turn) {
     turn.preventDefault();
     cursor.startZoom(turn);
-    // We ignore the dY from the browser, since it may be arbitrarily scaled
-    // based on screen resolution or other factors. We keep only the sign.
-    // See https://github.com/Leaflet/Leaflet/issues/4538
-    const zoomScale = 1.0 + 0.2 * Math.sign(turn.deltaY);
-    cursor.zoom(zoomScale);
+    cursor.zoom(getWheelScale(turn));
   }
 }
 
