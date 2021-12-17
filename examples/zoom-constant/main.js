@@ -16,6 +16,14 @@ export function setupMap(canvas) {
   requestAnimationFrame(animate);
 
   function animate() {
+    if (cursor.touchStarted()) {
+      dragging = true;
+      x0 = cursor.x();
+      y0 = cursor.y();
+    }
+    if (cursor.touchEnded()) {
+      dragging = false;
+    }
     if (dragging) {
       x += (cursor.x() - x0);
       y += (cursor.y() - y0);
@@ -28,14 +36,6 @@ export function setupMap(canvas) {
       x += (cursor.x() - cx - x) * (1.0 - zscale);
       y += (cursor.y() - cy - y) * (1.0 - zscale);
       scale *= zscale;
-    }
-    if (cursor.touchStarted()) {
-      dragging = true;
-      x0 = cursor.x();
-      y0 = cursor.y();
-    }
-    if (cursor.touchEnded()) {
-      dragging = false;
     }
     cursor.reset();
 
