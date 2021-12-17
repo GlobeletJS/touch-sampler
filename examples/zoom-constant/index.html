@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>touch-sampler - beta</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="globe.svg">
+
+<style>
+canvas {
+  width: 512px;
+  height: 512px;
+  background-color: beige;
+}
+</style>
+
+  </head>
+
+  <body>
+    <canvas id="map"></canvas>
+  </body>
+
+  <script type="module">
+    import { setupMap } from "./main.js";
+
+    const canvas = document.getElementById("map");
+    canvas.width = canvas.height = 512;
+
+    setupMap(canvas);
+  </script>
+</html>
