@@ -22,6 +22,11 @@ fire at arbitrary times, not in sync with the frame rate. touch-sampler helps
 keep track of these events by storing information about them until the next
 frame, when the main program is ready to use them.
 
+Check out the simple [example][] of touch-sampler being used to interactively
+update a Canvas transform.
+
+[example]: https://globeletjs.github.io/touch-sampler/examples/zoom-variable/
+
 ## Usage
 ```javascript
 import { initTouch } from "touch-sampler";
