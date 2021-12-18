@@ -31,8 +31,6 @@ function wheelScale(turn) {
 }
 
 function wheelScale_const(turn) {
-  // We ignore the dY from the browser, since it may be arbitrarily scaled
-  // based on screen resolution or other factors. We keep only the sign.
-  // See https://github.com/Leaflet/Leaflet/issues/4538
+  // Ignore dY from the browser - may be arbitrarily scaled. Keep only the sign
   return 1.0 + 0.2 * Math.sign(turn.deltaY);
 }

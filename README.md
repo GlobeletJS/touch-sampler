@@ -10,9 +10,9 @@ calling program to **sample** user interactions when it is ready for them,
 rather than having to handle them as they occur.
 
 This on-demand reporting of interactions is useful for animations based on
-physical modeling. In these animations, the physical state (velocity, 
+physical modeling. In these animations, the physical state (velocity,
 acceleration, etc) is updated once per frame, at typical frame rates of 60
-frames per second. 
+frames per second.
 
 At each frame, the updated physical state depends on both the state from the
 previous frame, and any user interactions that have occured *between* the
@@ -23,9 +23,14 @@ keep track of these events by storing information about them until the next
 frame, when the main program is ready to use them.
 
 ## Usage
+```javascript
+import { initTouch } from "touch-sampler";
+
+const cursor = initTouch(HTMLElement);
+```
 
 initTouch takes one argument: the HTML element on which mouse or touch events
-will be detected. initTouch returns a cursor object with methods to query and 
+will be detected. initTouch returns a cursor object with methods to query and
 reset the stored information.
 
 At each frame refresh, the calling code should:
